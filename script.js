@@ -21,18 +21,18 @@ function addTask()
     taskInput.value="";
     console.log(tasks);
     localStorage.setItem("taskHistory",JSON.stringify(tasks));
-    renderTask();
+    renderTask(tasks);
 }
-function renderTask()
+function renderTask(tasksRe)
 {
     let taskText=document.getElementById("tasks");
     taskText.innerHTML="";
-    for(let i=0;i<tasks.length;i++)
+    for(let i=0;i<tasksRe.length;i++)
     {
         let taskCard=document.createElement("div");
         let taskInfo=document.createElement("span");
         taskCard.className="task-card";
-        taskInfo.textContent=`${tasks[i].text} | ${tasks[i].category} | ${tasks[i].priority}`;
+        taskInfo.textContent=`${tasksRe[i].text} | ${tasksRe[i].category} | ${tasksRe[i].priority}`;
         taskText.appendChild(taskCard);
         taskCard.appendChild(taskInfo);
         
@@ -43,10 +43,10 @@ function renderTask()
         let deleteBtn=document.createElement("button");
         deleteBtn.textContent="Noo!";
         taskCard.appendChild(deleteBtn);
-        let taskId=tasks[i].id;
+        let taskId=tasksRe[i].id;
         deleteBtn.onclick=function() {deleteTask(taskId)};
         completeBtn.onclick=function() {completeTask(taskId)};
-        let task_completion=tasks[i].completed;
+        let task_completion=tasksRe[i].completed;
         if(task_completion==true)
         {
             taskCard.style.textDecoration="line-through";
@@ -58,7 +58,7 @@ function deleteTask(someId)
 {
     tasks=tasks.filter(task => task.id!=someId);
     localStorage.setItem("taskHistory",JSON.stringify(tasks));
-    renderTask();
+    renderTask(tasks);
 }
 function completeTask(someId)
 {
@@ -68,8 +68,25 @@ function completeTask(someId)
             tasks[i].completed=true;
     }
     localStorage.setItem("taskHistory",JSON.stringify(tasks));
-    renderTask();
+    renderTask(tasks);
 }
 window.onload = function() {
-    renderTask();
+    document.getElementById("category-filter").onchange = filterTask;
+    document.getElementById("priority-filter").onchange = filterTask;
+    renderTask(tasks);
+}
+function filterTask()
+{
+    let filterCat=document.getElementById("category-filter");
+    let filterPri=document.getElementById("priority-filter");
+    let filteredTasks;
+    if(filterCat.value=="All")
+        filteredTasks=tasks;
+    else
+        filteredTasks=tasks.filter(task=> task.category === filterCat.value);
+
+    if(filterPri.value!="All")
+        filteredTasks=filteredTasks.filter(task=> task.priority === filterPri.value);
+
+    renderTask(filteredTasks);
 }

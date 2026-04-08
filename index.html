@@ -23,7 +23,23 @@
 
             <button onclick="addTask()" id="addTask">ADD</button>
         </div>
-        <div id="filters"></div>
+        <div id="filters">
+            <select id="category-filter">
+                <option value="All">-- Filter by Category --</option>
+                <option value="All">All</option>
+                <option  value="college">College</option>
+                <option  value="work">Work</option>
+                <option  value="personal">Personal</option>
+            </select>
+
+            <select id="priority-filter">
+                <option value="All">-- Filter by Priority --</option>
+                <option value="All">All</option>
+                <option  value="high">High Priority</option>
+                <option  value="moderate">Moderate Priority</option>
+                <option  value="low">Low Priority</option>
+            </select>
+        </div>
 
         <div id="tasks"></div>
         <script src="script.js"></script>
