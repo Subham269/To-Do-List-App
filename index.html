@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>To Do List</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>To Do List :</h1>
+        <div class="input-section">
+            <input id="task-input" type="text" placeholder="Enter Task....">
+            
+            <select id="category-select">
+                <option  value="college">College</option>
+                <option  value="work">Work</option>
+                <option  value="personal">Personal</option>
+            </select>
+
+            <select id="priority-select">
+                <option  value="high">High Priority</option>
+                <option  value="moderate">Moderate Priority</option>
+                <option  value="low">Low Priority</option>
+            </select>
+
+            <button onclick="addTask()" id="addTask">ADD</button>
+        </div>
+        <div id="filters"></div>
+
+        <div id="tasks">
+
+            
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
