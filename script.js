@@ -1,4 +1,4 @@
-let tasks=[];
+let tasks=JSON.parse(localStorage.getItem("taskHistory"))|| [];
 function addTask()
 {
     let taskInput = document.getElementById("task-input");
@@ -20,6 +20,7 @@ function addTask()
     tasks.push(taskinp);
     taskInput.value="";
     console.log(tasks);
+    localStorage.setItem("taskHistory",JSON.stringify(tasks));
     renderTask();
 }
 function renderTask()
@@ -56,6 +57,7 @@ function renderTask()
 function deleteTask(someId)
 {
     tasks=tasks.filter(task => task.id!=someId);
+    localStorage.setItem("taskHistory",JSON.stringify(tasks));
     renderTask();
 }
 function completeTask(someId)
@@ -65,5 +67,9 @@ function completeTask(someId)
         if(tasks[i].id==someId)
             tasks[i].completed=true;
     }
+    localStorage.setItem("taskHistory",JSON.stringify(tasks));
+    renderTask();
+}
+window.onload = function() {
     renderTask();
 }
