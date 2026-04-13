@@ -19,7 +19,6 @@ function addTask()
     
     tasks.push(taskinp);
     taskInput.value="";
-    console.log(tasks);
     localStorage.setItem("taskHistory",JSON.stringify(tasks));
     renderTask(tasks);
 }
@@ -30,9 +29,23 @@ function renderTask(tasksRe)
     for(let i=0;i<tasksRe.length;i++)
     {
         let taskCard=document.createElement("div");
-        let taskInfo=document.createElement("span");
+        let taskInfo = document.createElement("div");
+        taskInfo.className = "task-info";;
         taskCard.className="task-card";
-        taskInfo.textContent=`${tasksRe[i].text} | ${tasksRe[i].category} | ${tasksRe[i].priority}`;
+        let textSpan = document.createElement("span");
+        let categorySpan = document.createElement("span");
+        let prioritySpan = document.createElement("span");
+        textSpan.textContent = tasksRe[i].text;
+        categorySpan.textContent = tasksRe[i].category;
+        prioritySpan.textContent = tasksRe[i].priority;
+
+        textSpan.className = "text-col";
+        categorySpan.className = "cat-col";
+        prioritySpan.className = "pri-col";
+
+        taskInfo.appendChild(textSpan);
+        taskInfo.appendChild(categorySpan);
+        taskInfo.appendChild(prioritySpan);
         taskText.appendChild(taskCard);
         taskCard.appendChild(taskInfo);
         
